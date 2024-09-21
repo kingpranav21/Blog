@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body{
+           display:flex;
+           align-items:center;
+           justify-content:center;
+           height:100vh;
+           width:100%;
+           margin:0px;
+           padding:0px;
+       }
+       .registration{
+           display:flex;
+           flex-direction:column;
+           align-items:center;
+           justify-content:center;
+           height:40%;
+           width:36%;
+           text-align:center;
+           border:2px solid black;
+           border-radius:4px;
+       }
+       .name{
+           padding:10px 0px;
+       }
+       .email{
+           padding:10px 0px;
+       }
+       .password{
+           padding:10px 0px;
+       }
+       .name input{
+           padding:2px 4px;
+           width:100%;
+           font-size:19px;
+           border:2px solid black;
+       }
+       .email input{
+           padding:2px 4px;
+           width:100%;
+           font-size:19px;
+           border:2px solid black;
+       }
+       .password input{
+           padding:2px 4px;
+           width:100%;
+           font-size:19px;
+           border:2px solid black;
+       }
+       .btn{
+           padding:2px 4px;
+           width:105%;
+           height:18%;
+           font-size:19px;
+           border-radius:4px;
+           background-color:black;
+           color:white;
+           font-weight:700;
+           border:none
+       }
+       h2{
+           font-size:30px;
+           font-weight:200;
+       }
+       .error{
+           color:red;
+       }
+       .logout{
+           color:green;
+       }
+       .login a{
+           color:blue;
+           text-decoration:none;
+       }
+    </style>
+</head>
+<body>
+<div class="registration">
+    <h2>Registration</h2>
+    <form action="#" th:action="@{/register/submitRegistrationForm}" th:object="${user}" method="post">
+        <div class="name">
+            <input type="text" th:field="*{name}" placeholder="Name" required>
+        </div>
+        <div class="email">
+            <input type="email" th:field="*{email}" placeholder="Email" required>
+        </div>
+        <div class="password">
+            <input type="password" th:field="*{password}" placeholder="Password" required>
+        </div>
+        <button class="btn" type="submit">Register</button>
+        <div class="login">
+            <p>Have account ? <a href="/login">Login</a></p>
+        </div>
+    </form>
+</div>
+</body>
+</html>

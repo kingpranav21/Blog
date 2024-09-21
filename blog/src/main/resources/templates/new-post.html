@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Newpost</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff; /* White background */
+            color: #000; /* Black text */
+            margin: 0;
+            padding: 0;
+            text-align:center;
+        }
+
+        h3 {
+            color: #000; /* Black text */
+            text-align:left;
+        }
+
+        form {
+            margin: 20px;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="submit"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #000;
+            height: 40px;
+            font-size:19px;
+        }
+
+        textarea {
+            resize: vertical; /* Allow vertical resizing */
+            height: 320px; /* Set initial height to 7 rows */
+        }
+
+        input[type="submit"] {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #333; /* Darker black background on hover */
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #000; /* Black horizontal line */
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>New/Edit post</h1>
+<hr>
+
+<form actions="#" th:action="@{/publish}" th:object="${post}" method="POST">
+    <input th:type="hidden" th:field="*{id}">
+    <h3>TITLE</h3>
+    <input th:type="text" th:field="*{title}" placeholder="Title"><br><br>
+    <h3>TAGS</h3>
+    <input th:type="text" name="tag" placeholder="Tags" th:value="${tags}">
+    <h3>AUTHOR</h3>
+    <input th:type="text" th:field="*{author.name}" disabled >
+    <br><br>
+    <h3>CONTENT</h3>
+    <textarea th:field="*{content}" placeholder="Write Here ..." rows="30"></textarea>
+    <br><br>
+    <input th:type="submit" th:value="PUBLISH">
+</form>
+<hr>
+</body>
+</html>

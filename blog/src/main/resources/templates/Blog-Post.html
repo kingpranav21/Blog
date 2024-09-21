@@ -1,0 +1,358 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Blog Post Details</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            line-height: 1.6;-->
+<!--            margin: 0;-->
+<!--            padding: 20px;-->
+<!--            background-color: #f4f4f4;-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        .blogdata{-->
+<!--            max-width: 1400px;-->
+<!--            margin: auto;-->
+
+<!--        }-->
+<!--        .container {-->
+
+<!--            margin: auto;-->
+<!--            background: #fff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 5px;-->
+<!--            box-shadow: 0 0 10px rgba(0,0,0,0.1);-->
+<!--        }-->
+
+<!--        h1, h2, h3 {-->
+<!--            color: #333;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        p {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .buttons {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        .update, .delete {-->
+<!--            display: inline-block;-->
+<!--            padding: 10px 20px;-->
+<!--            margin: 0 10px;-->
+<!--            border: none;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            text-decoration: none;-->
+<!--            font-size: 16px;-->
+<!--            font-weight: bold;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .update {-->
+<!--            background-color: lightblue;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .delete {-->
+<!--            background-color: red;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .update:hover, .delete:hover {-->
+<!--            background-color: rgba(0, 0, 0, 0.8);-->
+<!--        }-->
+
+<!--        .comments {-->
+<!--            margin-top: 40px;-->
+<!--        }-->
+
+<!--        .comment {-->
+<!--            background-color: #f9f9f9;-->
+<!--            padding: 10px;-->
+<!--            border-radius: 5px;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .comment p {-->
+<!--            margin: 0;-->
+<!--        }-->
+<!--        .comment-form {-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        .comment-form input[type="text"],-->
+<!--        .comment-form textarea {-->
+<!--            width: calc(100% - 20px);-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--            border-radius: 5px;-->
+<!--            border: 1px solid #ccc;-->
+<!--        }-->
+
+<!--        .comment-form input[type="submit"] {-->
+<!--            background-color: lightblue;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px 20px;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            font-size: 16px;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .comment-form input[type="submit"]:hover {-->
+<!--            background-color: rgba(0, 0, 0, 0.8);-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="blogdata">-->
+<!--    <div class="header">-->
+<!--      <h3>Blog Data</h3>-->
+<!--      <a th:href="@{/homepage}">BACK TO HOMEPAGE</a>-->
+<!--    </div>-->
+<!--    <div class="container">-->
+<!--        <h1 th:text="${post.title}">Title</h1>-->
+<!--        <p>Author: <span th:text="${post.author.name}">Author</span> &nbsp;-->
+<!--         Published At: <span th:text="${post.publishedAt}">Published Date</span></p>-->
+<!--        <p th:text="${post.content}">Content</p>-->
+<!--    </div>-->
+
+<!--    <div class="buttons">-->
+<!--        <a class="update" th:href="@{'/updateblog/'+${post.id}}">Update</a>-->
+<!--        <a class="delete" th:href="@{'/deleteblog/'+${post.id}}">Delete</a>-->
+<!--    </div>-->
+<!--    <div class="comments">-->
+<!--        <h2>Comments</h2>-->
+<!--        <div class="comment-form">-->
+<!--            <h3>Add a Comment</h3>-->
+<!--            <form th:action="@{'/comments/'+${post.id}+'/'+${Comment.id}}" th:object="${Comment}" method="post">-->
+<!--                <textarea  th:field="${Comment.comment}" placeholder="Your Comment" th:value="${commentstring}" required></textarea>-->
+<!--                <input type="submit" value="Submit" />-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div th:each="comment : ${post.comments}">-->
+<!--            <br><br>-->
+<!--            <span th:text="${comment.updatedAt}"></span>-->
+<!--            <p><span th:text="${comment.name}">Username : </span>: <span th:text="${comment.comment}"></span></p>-->
+<!--            <div>-->
+<!--                <form th:action="@{'/edit-comment/'+${post.id}+'/'+${comment.id}}" method="post" style="display: inline; color:light-blue;">-->
+<!--                    <button type="submit" style="background-color: red; color: white; border-radius:4px; border:none; font-size:17px; padding:4px 2px">Edit</button>-->
+<!--                </form>-->
+<!--                <form th:action="@{'/delete-comment/'+${post.id}+'/'+${comment.id}}" method="post" style="display: inline;">-->
+<!--                    <button type="submit" style="background-color: blue; color: white; border-radius:4px; border:none; font-size:17px; padding:4px 2px">Delete</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .blogdata {
+            max-width: 1400px;
+            margin: auto;
+            color: #000;
+        }
+
+        .container {
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .update, .delete {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid black;
+        }
+
+        .update {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .delete {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .update:hover, .delete:hover {
+            color:black;
+            background-color:white;
+            border:1px solid black;
+            box-sizing:border-box;
+        }
+
+        .comments {
+            margin-top: 40px;
+        }
+
+        .comment {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .comment p {
+            margin: 0;
+        }
+
+        .comment-form {
+            margin-top: 20px;
+        }
+
+        .comment-form input[type="text"],
+        .comment-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #000;
+            color: #000;
+        }
+
+        .comment-form input[type="submit"] {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-sizing:border-box;
+        }
+
+        .comment-form input[type="submit"]:hover {
+            color:black;
+            background-color:white;
+            border:1px solid black;
+            box-sizing:border-box;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .header a {
+            text-decoration: none;
+            color:black
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+<div class="blogdata">
+    <div class="header">
+        <h1>Blog Data</h1>
+        <a th:href="@{/homepage}">BACK TO HOMEPAGE</a>
+    </div>
+    <div class="container">
+        <h1 th:text="${post.title}">Title</h1>
+        <p>Author: <span th:text="${post.author.name}">Author</span> &nbsp;
+            Published At: <span th:text="${post.publishedAt}">Published Date</span></p>
+        <p th:text="${post.content}">Content</p>
+    </div>
+
+    <div class="buttons" th:if="${postOfUser} or ${#authorization.expression('hasRole(''ADMIN'')')}">
+        <a class="update" th:href="@{'/updateblog/'+${post.id}}">Update</a>
+        <a class="delete"  th:href="@{'/deleteblog/'+${post.id}}">Delete</a>
+    </div>
+    <div class="comments">
+        <h2>Comments</h2>
+        <div class="comment-form">
+            <h3>Add a Comment</h3>
+            <form th:action="@{'/comments/'+${post.id}+'/'+${Comment.id}}" th:object="${Comment}" method="post">
+                <textarea  th:field="${Comment.comment}" placeholder="Your Comment" th:value="${commentstring}" required></textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div th:each="comment : ${post.comments}">
+            <br><br>
+            <span th:text="${comment.updatedAt}"></span>
+            <p><span th:text="${comment.name}">Username : </span>: <span th:text="${comment.comment}"></span></p>
+            <div>
+                <form th:if="${postOfUser} or ${#authorization.expression('hasRole(''ADMIN'')')}" th:action="@{'/edit-comment/'+${post.id}+'/'+${comment.id}}" method="post" style="display:inline; color:light-blue;">
+                    <button type="submit" style="background-color: black; width:70px; margin-right:12px; color: white; border-radius:4px; border:none; font-size:17px; padding:4px 2px">Edit</button>
+                </form>
+                <form th:if="${postOfUser} or ${#authorization.expression('hasRole(''ADMIN'')')}" th:action="@{'/delete-comment/'+${post.id}+'/'+${comment.id}}" method="post" style="display: inline;">
+                    <button type="submit" style="background-color: black; width:70px; color: white; border-radius:4px; border:none; font-size:17px; padding:4px 2px">Delete</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
